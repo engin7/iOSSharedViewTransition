@@ -11,6 +11,7 @@ protocol  ASFSharedViewTransitionDataSource: NSObject {
     func sharedView()-> UIView
 }
 
+ 
 class ParamsHolder : NSObject {
     
     var nav :UINavigationController? = nil
@@ -24,21 +25,12 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
     
     static let shared: ASFSharedViewTransition = ASFSharedViewTransition()
 
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0
-    }
-    
-    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        
-    }
-    
-     
     var arrParamHolders: [ParamsHolder] = []
    
     
     // MARK: - Private Methods
     
-    func paramHolderForFromVC(fromVC:UIViewController?,toVC:UIViewController?, reversed: Bool ) -> ParamsHolder? {
+    func paramHolderForFromVC(fromVC:UIViewController?,toVC:UIViewController?, reversed: Bool?) -> ParamsHolder? {
         
         var pHolder: ParamsHolder? = nil
         let ASFShared = ASFSharedViewTransition.shared
@@ -49,7 +41,7 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
             }
             else if (holder.fromVCClass == toVC && holder.toVCClass == fromVC) {
                 pHolder = holder;
-            
+                //  you should use reversed = true or nil in parameter
             }
         }
         
@@ -88,13 +80,72 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
     }
     
     
+    // MARK: -  UINavigationControllerDelegate Methods
+
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        let pHolder = paramHolderForFromVC(fromVC: fromVC, toVC: toVC, reversed: nil)
+        if (pHolder != nil) {
+            return ASFSharedViewTransition.shared
+        }
+        else {
+            return nil
+        }
+        
+    }
+     
+    // MARK: - UIViewControllerContextTransitioning
+    
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        
+        
+        var fromVC = transitionContext.viewController(forKey: .from)
+        var toVC = transitionContext.viewController(forKey: .to)
+        
+ 
+        
+        var reversed = false
+        
+        let pHolder = paramHolderForFromVC(fromVC: fromVC, toVC: toVC, reversed: nil)
+        
+        if (pHolder == nil) {return}
+        
+        let fromView = fromVC?.sharedView()
+        let toView = toVC?.sharedView()
+        
+        let containerView = transitionContext.containerView
+        let dur = transitionDuration(using: transitionContext)
+        
+        // Take Snapshot of fomView
+        let snapshotView = fromView?.snapshotView(afterScreenUpdates: false)
+        snapshotView?.frame = containerView.convert(fromView!.frame, from: fromView?.superview)
+        
+        // Setup the initial view states
+        toVC!.view.frame = transitionContext.finalFrame(for: toVC!)
+        
+        
+        
+        
+        
+    }
     
     
+     
     
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return 0
+    }
     
 }
 
-
+extension UIViewController: ASFSharedViewTransitionDataSource {
+    func sharedView() -> UIView {
+        return view
+    }
+    
+    
+}
+  
 
 
 
