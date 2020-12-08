@@ -140,24 +140,32 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
            }
             // Move the SnapshotView
             snapshotView.frame = containerView.convert(toView.frame, from: toView.superview)
-        }
-//        completion: ((Bool) -> Void)?) {
-//            // Clean up
-//            toView.isHidden = false
-//            fromView.isHidden = false
-//            snapshotView.removeFromSuperview
-//
-//            // Declare that we've finished
-//            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-//
-//            )}
+        },   completion:  { _ in
+            // Clean up
+            toView.isHidden = false
+            fromView.isHidden = false
+            snapshotView.removeFromSuperview()
+
+            // Declare that we've finished
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+
+            }
     
    ) }
-    
      
-    
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0
+        
+        guard let fromVC = transitionContext?.viewController(forKey: .from) else {return 0}
+        guard let toVC = transitionContext?.viewController(forKey: .to) else {return 0}
+        
+        let pHolder = paramHolderForFromVC(fromVC: fromVC, toVC: toVC, reversed: nil)
+
+        if (pHolder != nil) {
+            return pHolder!.duration
+        }
+        else {
+            return 0
+        }
     }
     
 }
