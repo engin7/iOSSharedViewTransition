@@ -7,13 +7,25 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, ASFSharedViewTransitionDataSource {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
 
-
+    
+    
+    
+    
+    
+    
+    
+    // MARK: - ASFSharedViewTransitionDataSource
+     
+    func sharedView() -> UIView {
+        return view
+    }
+    
 }
 
