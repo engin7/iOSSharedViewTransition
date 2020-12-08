@@ -98,37 +98,61 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
-        
-        var fromVC = transitionContext.viewController(forKey: .from)
-        var toVC = transitionContext.viewController(forKey: .to)
-        
- 
-        
+        guard let fromVC = transitionContext.viewController(forKey: .from) else {return}
+        guard let toVC = transitionContext.viewController(forKey: .to) else {return}
+         
         var reversed = false
         
         let pHolder = paramHolderForFromVC(fromVC: fromVC, toVC: toVC, reversed: nil)
         
         if (pHolder == nil) {return}
         
-        let fromView = fromVC?.sharedView()
-        let toView = toVC?.sharedView()
+        let fromView = fromVC.sharedView()
+        let toView = toVC.sharedView()
         
         let containerView = transitionContext.containerView
         let dur = transitionDuration(using: transitionContext)
         
         // Take Snapshot of fomView
-        let snapshotView = fromView?.snapshotView(afterScreenUpdates: false)
-        snapshotView?.frame = containerView.convert(fromView!.frame, from: fromView?.superview)
+        guard let snapshotView = fromView.snapshotView(afterScreenUpdates: false) else {return}
+        snapshotView.frame = containerView.convert(fromView.frame, from: fromView.superview)
         
         // Setup the initial view states
-        toVC!.view.frame = transitionContext.finalFrame(for: toVC!)
+        toVC.view.frame = transitionContext.finalFrame(for: toVC)
         
+        if (!reversed) {
+            toVC.view.alpha = 0
+            toView.isHidden = true
+            containerView.addSubview(toVC.view)
+        }
+        else {
+            containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
+        }
         
-        
-        
-        
-    }
+        containerView.addSubview(snapshotView)
+       
+        UIView.animate(withDuration: dur, animations:  {
+            if (!reversed) {
+               toVC.view.alpha = 1.0; // Fade in
+           }
+           else {
+               fromVC.view.alpha = 0.0; // Fade out
+           }
+            // Move the SnapshotView
+            snapshotView.frame = containerView.convert(toView.frame, from: toView.superview)
+        }
+//        completion: ((Bool) -> Void)?) {
+//            // Clean up
+//            toView.isHidden = false
+//            fromView.isHidden = false
+//            snapshotView.removeFromSuperview
+//
+//            // Declare that we've finished
+//            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+//
+//            )}
     
+   ) }
     
      
     
