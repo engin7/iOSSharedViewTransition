@@ -25,12 +25,24 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         return cell
     }
     
+    // MARK: - Navigation
+    
+    override  func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+              if (segue.identifier == SegueTo.showDetails.rawValue) {
+                  let vc = segue.destination as! DetailViewController
+                vc.img = sender as? UIImage
+              }
+          }
+    
     // MARK: - UICollectionViewDelegate protocol
-       
+ 
        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
            // handle tap events
-           print("You selected cell #\(indexPath.item)!")
+        let image = arrImages[indexPath.row]
+            self.performSegue(withIdentifier: SegueTo.showDetails.rawValue, sender: image)
        }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,12 +60,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     
     
-    
-    
-    
-    // MARK: - ASFSharedViewTransitionDataSource
-     
-   
-    
 }
 
+extension ViewController {
+    private enum SegueTo: String {
+        case showDetails = "DetailViewController"
+    }
+}

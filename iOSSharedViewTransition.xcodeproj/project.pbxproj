@@ -80,8 +80,8 @@
 			children = (
 				286FD074257F739800F080B8 /* AppDelegate.swift */,
 				286FD076257F739800F080B8 /* SceneDelegate.swift */,
-				286FD078257F739800F080B8 /* ViewController.swift */,
 				28ADFEDC2580C9E200C3C2A0 /* CollectionViewCell.swift */,
+				286FD078257F739800F080B8 /* ViewController.swift */,
 				28ADFEC02580B3F500C3C2A0 /* DetailViewController.swift */,
 				286FD07A257F739800F080B8 /* Main.storyboard */,
 				286FD07D257F739A00F080B8 /* Assets.xcassets */,

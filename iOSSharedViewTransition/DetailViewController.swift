@@ -9,12 +9,18 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
+    @IBOutlet weak var detailImageView: UIImageView!
+    var img : UIImage?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        detailImageView.image = img
         // Do any additional setup after loading the view.
     }
 
      
+    
     // MARK: - ASFSharedViewTransitionDataSource
      
    
