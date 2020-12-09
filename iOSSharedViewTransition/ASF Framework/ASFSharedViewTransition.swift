@@ -10,11 +10,10 @@ import UIKit
 protocol  ASFSharedViewTransitionDataSource: NSObject {
     func sharedView()-> UIView
 }
-
  
 class ParamsHolder : NSObject {
     
-    var nav :UINavigationController? = nil
+    var nav :UINavigationController?
     var duration: TimeInterval = 0
     var fromVCClass: UIViewController?
     var toVCClass: UIViewController?
@@ -25,11 +24,9 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
     
     static let shared: ASFSharedViewTransition = ASFSharedViewTransition()
     
-    var arrParamHolders: [ParamsHolder]
+    var arrParamHolders: [ParamsHolder] = []
    
-    private override init() {
-        arrParamHolders = []
-    }
+  
     
     // MARK: - Private Methods
     
@@ -85,12 +82,6 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
         }
     }
     
-    // test
-    func test(class: UIViewController) {
-         
-    }
-    
-    
     // MARK: -  UINavigationControllerDelegate Methods
 
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -126,7 +117,7 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
         // Take Snapshot of fomView
         guard let snapshotView = fromView.snapshotView(afterScreenUpdates: true) else {return}
         snapshotView.frame = containerView.convert(fromView.frame, from: fromView.superview)
-        
+
         // Setup the initial view states
         toVC.view.frame = transitionContext.finalFrame(for: toVC)
         
