@@ -30,7 +30,7 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
     
     // MARK: - Private Methods
     
-    func paramHolderForFromVC(fromVC:UIViewController?,toVC:UIViewController?, reversed: Bool?) -> ParamsHolder? {
+    func paramHolderForFromVC(fromVC:UIViewController?,toVC:UIViewController?) -> ParamsHolder? {
         
         var pHolder: ParamsHolder? = nil
         let ASFShared = ASFSharedViewTransition.shared
@@ -41,7 +41,6 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
             }
             else if (holder.fromVCClass == toVC && holder.toVCClass == fromVC) {
                 pHolder = holder;
-                //  you should use reversed = true or nil in parameter
             }
         }
         
@@ -51,7 +50,6 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
     // MARK: -  Public Methods
 
     func addTransitionWithFromViewControllerClass(aFromVCClass: ASFSharedViewTransitionDataSource, aToVCClass:ASFSharedViewTransitionDataSource, aNav:UINavigationController,aDuration:TimeInterval)
-                              
     {
         var found = false
         let ASFShared = ASFSharedViewTransition.shared
@@ -79,19 +77,23 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
         }
     }
     
+    // test
+    func test(class: ASFSharedViewTransitionDataSource) {
+         
+    }
+    
     
     // MARK: -  UINavigationControllerDelegate Methods
 
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        let pHolder = paramHolderForFromVC(fromVC: fromVC, toVC: toVC, reversed: nil)
+        let pHolder = paramHolderForFromVC(fromVC: fromVC, toVC: toVC)
         if (pHolder != nil) {
             return ASFSharedViewTransition.shared
         }
         else {
             return nil
         }
-        
     }
      
     // MARK: - UIViewControllerContextTransitioning
@@ -103,7 +105,8 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
          
         var reversed = false
         
-        let pHolder = paramHolderForFromVC(fromVC: fromVC, toVC: toVC, reversed: nil)
+        let pHolder = paramHolderForFromVC(fromVC: fromVC, toVC: toVC)
+        reversed = true
         
         if (pHolder == nil) {return}
         
@@ -120,7 +123,7 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
         // Setup the initial view states
         toVC.view.frame = transitionContext.finalFrame(for: toVC)
         
-        if (!reversed) {
+        if (reversed == nil) {
             toVC.view.alpha = 0
             toView.isHidden = true
             containerView.addSubview(toVC.view)
@@ -132,7 +135,7 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
         containerView.addSubview(snapshotView)
        
         UIView.animate(withDuration: dur, animations:  {
-            if (!reversed) {
+            if (reversed == nil) {
                toVC.view.alpha = 1.0; // Fade in
            }
            else {
@@ -158,7 +161,7 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
         guard let fromVC = transitionContext?.viewController(forKey: .from) else {return 0}
         guard let toVC = transitionContext?.viewController(forKey: .to) else {return 0}
         
-        let pHolder = paramHolderForFromVC(fromVC: fromVC, toVC: toVC, reversed: nil)
+        let pHolder = paramHolderForFromVC(fromVC: fromVC, toVC: toVC)
 
         if (pHolder != nil) {
             return pHolder!.duration
