@@ -12,13 +12,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-  
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        let asf = ASFSharedViewTransition.shared
-        
-        asf.addTransitionWithFromViewControllerClass(aFromVCClass: ViewController(), aToVCClass: DetailViewController(), aNav: window?.rootViewController! as! UINavigationController, aDuration: 0.3)
-        
+      
         return true
     }
 
