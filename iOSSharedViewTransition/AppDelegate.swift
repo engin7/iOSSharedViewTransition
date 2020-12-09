@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         let asf = ASFSharedViewTransition.shared
         
+        asf.addTransitionWithFromViewControllerClass(aFromVCClass: ViewController(), aToVCClass: DetailViewController(), aNav: window?.rootViewController! as! UINavigationController, aDuration: 0.3)
         
         return true
     }

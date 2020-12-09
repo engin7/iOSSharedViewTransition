@@ -16,8 +16,8 @@ class ParamsHolder : NSObject {
     
     var nav :UINavigationController? = nil
     var duration: TimeInterval = 0
-    var fromVCClass: NSObject?
-    var toVCClass: NSObject?
+    var fromVCClass: UIViewController?
+    var toVCClass: UIViewController?
     
 }
 
@@ -49,7 +49,7 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
   
     // MARK: -  Public Methods
 
-    func addTransitionWithFromViewControllerClass(aFromVCClass: ASFSharedViewTransitionDataSource, aToVCClass:ASFSharedViewTransitionDataSource, aNav:UINavigationController,aDuration:TimeInterval)
+    func addTransitionWithFromViewControllerClass(aFromVCClass: UIViewController, aToVCClass:UIViewController, aNav:UINavigationController,aDuration:TimeInterval)
     {
         var found = false
         let ASFShared = ASFSharedViewTransition.shared
@@ -78,7 +78,7 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
     }
     
     // test
-    func test(class: ASFSharedViewTransitionDataSource) {
+    func test(class: UIViewController) {
          
     }
     
