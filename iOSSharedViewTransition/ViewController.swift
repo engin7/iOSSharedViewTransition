@@ -43,16 +43,16 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             self.performSegue(withIdentifier: SegueTo.showDetails.rawValue, sender: image)
        }
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        for i in 1...8 {
-            arrImages.append(UIImage(named: "nature\(i).jpg")!)
+        for _ in 0...3 {
+            for i in 1...8 {
+                arrImages.append(UIImage(named: "nature\(i).jpg")!)
+            }
         }
     }
-
+ 
     // MARK: - ASFSharedViewTransitionDataSource
 
     override func sharedView() -> UIView {

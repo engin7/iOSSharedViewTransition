@@ -44,10 +44,12 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
             }
             else if type(of:holder.fromVCClass) == type(of:toVC)  && type(of:holder.toVCClass) == type(of:fromVC) {
                 pHolder = holder
+                
+                if !reversed {
+                    reversed = true
+                }
             }
-            if !reversed {
-                reversed = true
-            }
+            
         }
         
         return pHolder
