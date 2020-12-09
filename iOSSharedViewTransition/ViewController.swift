@@ -50,20 +50,26 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         for i in 1...8 {
             arrImages.append(UIImage(named: "nature\(i).jpg")!)
         }
-        
-       
-        
-        
+         
     }
 
-    
-    
-    
-    
+     
 }
 
 extension ViewController {
     private enum SegueTo: String {
         case showDetails = "DetailViewController"
+    }
+}
+
+extension ViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let height = CGFloat(120)
+        var width:CGFloat
+        // two coulmns
+        width  = collectionView.frame.width/2-15
+        
+        return CGSize(width: width, height: height)
     }
 }
