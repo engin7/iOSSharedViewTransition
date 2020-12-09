@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate  {
     
     
+    @IBOutlet weak var collectionView: UICollectionView!
     var arrImages: [UIImage] = []
     
     // MARK: - UICollectionViewDataSource protocol
@@ -52,6 +53,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
     }
 
+    // MARK: - ASFSharedViewTransitionDataSource
+
+    override func sharedView() -> UIView {
+        let index = self.collectionView.indexPathsForSelectedItems?.first
+        return collectionView(collectionView, cellForItemAt: index!)
+    }
+    
 }
 
 extension ViewController {

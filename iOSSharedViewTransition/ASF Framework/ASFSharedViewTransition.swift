@@ -172,13 +172,11 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
     }
     
 }
-
+ 
 extension UIViewController: ASFSharedViewTransitionDataSource {
-    func sharedView() -> UIView {
-        return view
-    }
-    
-    
+    @objc func sharedView() -> UIView {
+            return view
+       }
 }
   
 

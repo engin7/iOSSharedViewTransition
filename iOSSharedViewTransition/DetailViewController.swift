@@ -18,11 +18,12 @@ class DetailViewController: UIViewController {
         detailImageView.image = img
         // Do any additional setup after loading the view.
     }
-
-     
     
     // MARK: - ASFSharedViewTransitionDataSource
-     
-   
-    
+
+    override func sharedView() -> UIView {
+        return detailImageView
+    }
 }
+ 
+ 

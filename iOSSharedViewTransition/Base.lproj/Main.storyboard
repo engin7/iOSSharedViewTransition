@@ -68,6 +68,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Gallery" id="YPe-7P-Wkj"/>
                     <connections>
+                        <outlet property="collectionView" destination="pNs-a6-oSr" id="oT9-EZ-i7R"/>
                         <segue destination="aRB-Fh-ucL" kind="show" identifier="DetailViewController" id="KYs-zS-CDi"/>
                     </connections>
                 </viewController>
