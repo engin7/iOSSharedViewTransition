@@ -39,10 +39,10 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
         let ASFShared = ASFSharedViewTransition.shared
         
         for holder in ASFShared.arrParamHolders {
-            if (holder.fromVCClass == fromVC  && holder.toVCClass == toVC ) {
+            if type(of:holder.fromVCClass) == type(of:fromVC)  && type(of:holder.toVCClass) == type(of:toVC) {
                 pHolder = holder
             }
-            else if (holder.fromVCClass == toVC && holder.toVCClass == fromVC) {
+            else if type(of:holder.fromVCClass) == type(of:toVC)  && type(of:holder.toVCClass) == type(of:fromVC) {
                 pHolder = holder
             }
         }
