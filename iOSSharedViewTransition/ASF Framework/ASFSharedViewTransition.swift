@@ -24,9 +24,12 @@ class ParamsHolder : NSObject {
 class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewControllerAnimatedTransitioning {
     
     static let shared: ASFSharedViewTransition = ASFSharedViewTransition()
-
-    var arrParamHolders: [ParamsHolder] = []
+    
+    var arrParamHolders: [ParamsHolder]
    
+    private override init() {
+        arrParamHolders = []
+    }
     
     // MARK: - Private Methods
     
@@ -37,10 +40,10 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
         
         for holder in ASFShared.arrParamHolders {
             if (holder.fromVCClass == fromVC  && holder.toVCClass == toVC ) {
-                pHolder = holder;
+                pHolder = holder
             }
             else if (holder.fromVCClass == toVC && holder.toVCClass == fromVC) {
-                pHolder = holder;
+                pHolder = holder
             }
         }
         
