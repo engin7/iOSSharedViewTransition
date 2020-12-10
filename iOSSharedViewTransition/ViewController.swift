@@ -51,9 +51,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
      
     override func sharedView() -> UIView {
         let index = self.myCollectionView.indexPathsForSelectedItems?.first
-        print(myCollectionView)
-        print(collectionView(myCollectionView, cellForItemAt: index!).superview)
-        return collectionView(myCollectionView, cellForItemAt: index!)
+        print(myCollectionView) // not nil
+        print(collectionView(myCollectionView, cellForItemAt: index!).superview)  // this returns nil 
+        // there fore snapshotView.frame = containerView.convert(fromView.frame, from: fromView.superview) returns wrong frame
+        return collectionView(myCollectionView, cellForItemAt: index!) 
+        
+
     }
    
 }
