@@ -26,8 +26,6 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
     
     var arrParamHolders: [ParamsHolder] = []
    
-  
-    
     // MARK: - Private Methods
     
     func paramHolderForFromVC(fromVC:UIViewController?,toVC:UIViewController?, reversed: inout Bool) -> ParamsHolder? {
