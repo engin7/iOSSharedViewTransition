@@ -12,11 +12,13 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var detailImageView: UIImageView!
     var img : UIImage?
     
+    convenience init() {
+        self.init(nibName:nil, bundle:nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         detailImageView.image = img
-        // Do any additional setup after loading the view.
     }
     
     // MARK: - ASFSharedViewTransitionDataSource

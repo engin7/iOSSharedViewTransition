@@ -28,18 +28,20 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     // MARK: - Navigation
     
     override  func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-              if (segue.identifier == SegueTo.showDetails.rawValue) {
+        if type(of:segue.destination) == type(of:DetailViewController()) {
+                  let selectedIndexPath = self.collectionView.indexPathsForSelectedItems?.first
+            if (selectedIndexPath != nil) {
                   let vc = segue.destination as! DetailViewController
-                vc.img = sender as? UIImage
-              }
-          }
+                  vc.img = arrImages[selectedIndexPath!.row]
+            }
+        }
+    }
     
     // MARK: - UICollectionViewDelegate protocol
  
        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
            // handle tap events
-        let image = arrImages[indexPath.row]
-            self.performSegue(withIdentifier: SegueTo.showDetails.rawValue, sender: image)
+         
        }
     
     override func viewDidLoad() {
@@ -60,9 +62,4 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
 }
-
-extension ViewController {
-    private enum SegueTo: String {
-        case showDetails = "DetailViewController"
-    }
-}
+ 

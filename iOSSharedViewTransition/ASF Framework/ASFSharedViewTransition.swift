@@ -113,9 +113,12 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
         let dur = transitionDuration(using: transitionContext)
         
         // Take Snapshot of fomView
-        guard let snapshotView = fromView.snapshotView(afterScreenUpdates: true) else {return}
+        guard let snapshotImage = fromView.caSnapshot() else {return}
+        let snapshotView = UIImageView(image: snapshotImage)
+        snapshotView.clipsToBounds = true
         snapshotView.frame = containerView.convert(fromView.frame, from: fromView.superview)
-
+        fromView.isHidden = true
+        
         // Setup the initial view states
         toVC.view.frame = transitionContext.finalFrame(for: toVC)
         
@@ -176,6 +179,23 @@ extension UIViewController: ASFSharedViewTransitionDataSource {
        }
 }
   
+extension UIView {
 
+   /// The method drawViewHierarchyInRect:afterScreenUpdates: performs its operations on the GPU as much as possible
+   /// In comparison, the method renderInContext: performs its operations inside of your app’s address space and does
+   /// not use the GPU based process for performing the work.
+   /// https://stackoverflow.com/a/25704861/1418981
+   public func caSnapshot(scale: CGFloat = 0, isOpaque: Bool = false) -> UIImage? {
+      var isSuccess = false
+      UIGraphicsBeginImageContextWithOptions(bounds.size, isOpaque, scale)
+      if let context = UIGraphicsGetCurrentContext() {
+         layer.render(in: context)
+         isSuccess = true
+      }
+      let image = UIGraphicsGetImageFromCurrentImageContext()
+      UIGraphicsEndImageContext()
+      return isSuccess ? image : nil
+   }
+}
 
 
