@@ -17,9 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" indicatorStyle="white" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pNs-a6-oSr">
-                                <rect key="frame" x="0.0" y="20" width="375" height="792"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pNs-a6-oSr">
+                                <rect key="frame" x="0.0" y="88" width="375" height="724"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="g6c-J4-DtU">
                                     <size key="itemSize" width="141" height="85"/>
@@ -41,22 +40,28 @@
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="HQr-Lf-dmp"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="nPf-f0-ud8"/>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="4fO-As-OJh"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="xnt-JY-EfV"/>
                                 </connections>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="pNs-a6-oSr" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="3aN-aA-5GG"/>
+                            <constraint firstItem="pNs-a6-oSr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="bO4-cf-b75"/>
+                            <constraint firstItem="pNs-a6-oSr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="fut-iB-bbL"/>
+                            <constraint firstAttribute="bottom" secondItem="pNs-a6-oSr" secondAttribute="bottom" id="xPe-Ix-Fyj"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Gallery" id="YPe-7P-Wkj"/>
+                    <navigationItem key="navigationItem" title="Gallery" id="tTR-bF-j7P"/>
                     <connections>
-                        <outlet property="collectionView" destination="pNs-a6-oSr" id="oT9-EZ-i7R"/>
+                        <outlet property="collectionView" destination="pNs-a6-oSr" id="jpr-Fq-isR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="344.80000000000001" y="16.641679160419791"/>
+            <point key="canvasLocation" x="344.80000000000001" y="16.256157635467982"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="c94-LC-wOy">

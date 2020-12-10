@@ -115,8 +115,10 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
         // Take Snapshot of fomView
         guard let snapshotImage = fromView.caSnapshot() else {return}
         let snapshotView = UIImageView(image: snapshotImage)
-        snapshotView.clipsToBounds = true
         snapshotView.frame = containerView.convert(fromView.frame, from: fromView.superview)
+        print(fromView.superview?.frame)
+        print(fromView.frame)
+
         fromView.isHidden = true
         
         // Setup the initial view states
@@ -142,6 +144,7 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
            }
             // Move the SnapshotView
             snapshotView.frame = containerView.convert(toView.frame, from: toView.superview)
+
         },   completion:  { _ in
             // Clean up
             toView.isHidden = false

@@ -13,6 +13,19 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     @IBOutlet weak var collectionView: UICollectionView!
     var arrImages: [UIImage] = []
     
+    // MARK: - UICollectionViewDelegate protocol
+ 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        
+        for _ in 0...1 {
+            for i in 1...8 {
+                arrImages.append(UIImage(named: "nature\(i).jpg")!)
+            }
+        }
+    }
+    
     // MARK: - UICollectionViewDataSource protocol
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -29,37 +42,18 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     override  func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if type(of:segue.destination) == type(of:DetailViewController()) {
-                  let selectedIndexPath = self.collectionView.indexPathsForSelectedItems?.first
-            if (selectedIndexPath != nil) {
+            if let selectedIndexPath = self.collectionView.indexPathsForSelectedItems?.first {
                   let vc = segue.destination as! DetailViewController
-                  vc.img = arrImages[selectedIndexPath!.row]
+                  vc.img = arrImages[selectedIndexPath.row]
             }
         }
     }
-    
-    // MARK: - UICollectionViewDelegate protocol
- 
-       func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-           // handle tap events
-         
-       }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        for _ in 0...3 {
-            for i in 1...8 {
-                arrImages.append(UIImage(named: "nature\(i).jpg")!)
-            }
-        }
-    }
- 
-    // MARK: - ASFSharedViewTransitionDataSource
-
+     
     override func sharedView() -> UIView {
         let index = self.collectionView.indexPathsForSelectedItems?.first
+        print(collectionView(collectionView, cellForItemAt: index!).superview)
         return collectionView(collectionView, cellForItemAt: index!)
     }
-    
+   
 }
  

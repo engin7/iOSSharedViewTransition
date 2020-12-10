@@ -19,8 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         let asf = ASFSharedViewTransition.shared
-        
-        asf.addTransitionWithFromViewControllerClass(aFromVCClass: ViewController(), aToVCClass: DetailViewController(), aNav: window?.rootViewController as! UINavigationController, aDuration: 0.8)
+        asf.addTransitionWithFromViewControllerClass(aFromVCClass: ViewController(), aToVCClass: DetailViewController(), aNav: window?.rootViewController as! UINavigationController, aDuration: 0.5)
         
     }
 
