@@ -56,7 +56,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Gallery" id="tTR-bF-j7P"/>
                     <connections>
-                        <outlet property="collectionView" destination="pNs-a6-oSr" id="jpr-Fq-isR"/>
+                        <outlet property="myCollectionView" destination="pNs-a6-oSr" id="jpr-Fq-isR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

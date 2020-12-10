@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate  {
     
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var myCollectionView: UICollectionView!
     var arrImages: [UIImage] = []
     
     // MARK: - UICollectionViewDelegate protocol
@@ -42,7 +42,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     override  func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if type(of:segue.destination) == type(of:DetailViewController()) {
-            if let selectedIndexPath = self.collectionView.indexPathsForSelectedItems?.first {
+            if let selectedIndexPath = self.myCollectionView.indexPathsForSelectedItems?.first {
                   let vc = segue.destination as! DetailViewController
                   vc.img = arrImages[selectedIndexPath.row]
             }
@@ -50,9 +50,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
      
     override func sharedView() -> UIView {
-        let index = self.collectionView.indexPathsForSelectedItems?.first
-        print(collectionView(collectionView, cellForItemAt: index!).superview)
-        return collectionView(collectionView, cellForItemAt: index!)
+        let index = self.myCollectionView.indexPathsForSelectedItems?.first
+        print(myCollectionView)
+        print(collectionView(myCollectionView, cellForItemAt: index!).superview)
+        return collectionView(myCollectionView, cellForItemAt: index!)
     }
    
 }
