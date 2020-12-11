@@ -116,8 +116,6 @@ class ASFSharedViewTransition: NSObject, UINavigationControllerDelegate, UIViewC
         guard let snapshotImage = fromView.caSnapshot() else {return}
         let snapshotView = UIImageView(image: snapshotImage)
         snapshotView.frame = containerView.convert(fromView.frame, from: fromView.superview)
-//        print(fromView.superview?.frame)
-//        print(fromVC.view)
 
         fromView.isHidden = true
         
