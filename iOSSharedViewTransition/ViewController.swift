@@ -40,14 +40,35 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     // MARK: - Navigation
     
-    override  func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if type(of:segue.destination) == type(of:DetailViewController()) {
-            if let selectedIndexPath = self.myCollectionView.indexPathsForSelectedItems?.first {
-                  let vc = segue.destination as! DetailViewController
-                  vc.img = arrImages[selectedIndexPath.row]
-            }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MarketPlaceDetailVC") as? MarketPlaceDetailVC else {
+                        fatalError("MarketPlaceDetailVC could not be initialized with storyboard")
+                    }
+        
+         
+        
+        if let selectedIndexPath = self.myCollectionView.indexPathsForSelectedItems?.first {
+            vc.img = arrImages[selectedIndexPath.row]
         }
+         
+        navigationController?.pushViewController(vc, animated: true)
+         
     }
+    
+    
+    
+//    for storyboard segue:
+    
+//    override  func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if type(of:segue.destination) == type(of:DetailViewController()) {
+//            if let selectedIndexPath = self.myCollectionView.indexPathsForSelectedItems?.first {
+//                  let vc = segue.destination as! DetailViewController
+//                  vc.img = arrImages[selectedIndexPath.row]
+//            }
+//        }
+//    }
      
     override func sharedView() -> UIView {
         if let index = self.myCollectionView.indexPathsForSelectedItems?.first {
