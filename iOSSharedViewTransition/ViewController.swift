@@ -53,6 +53,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             vc.img = arrImages[selectedIndexPath.row]
         }
          
+        navigationController?.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
+
         navigationController?.pushViewController(vc, animated: true)
          
     }
